@@ -1,0 +1,15 @@
+{
+  "name": "puppetm-shinken",
+  "version": "0.1.0",
+  "author": "Julien Georges",
+  "summary": "Install & configure Shinken.",
+  "license": "Apache-2.0",
+  "source": "https://github.com/GiooDev/puppetm-shinken.git",
+  "project_page": "https://github.com/GiooDev/puppetm-shinken",
+  "issues_url": "https://github.com/GiooDev/puppetm-shinken/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+
