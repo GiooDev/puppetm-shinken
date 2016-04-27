@@ -1,5 +1,5 @@
 {
-  "name": "puppetm-shinken",
+  "name": "GiooDev-shinken",
   "version": "0.1.0",
   "author": "Julien Georges",
   "summary": "Install & configure Shinken.",
@@ -8,7 +8,8 @@
   "project_page": "https://github.com/GiooDev/puppetm-shinken",
   "issues_url": "https://github.com/GiooDev/puppetm-shinken/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"puppetlabs-inifile","version_requirement":">= 1.0.0"}
   ],
   "data_provider": null
 }
