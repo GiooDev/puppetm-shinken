@@ -35,14 +35,22 @@
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Julien Georges <julien.geo@gmail.com>
 #
 # Copyright
 # ---------
 #
-# Copyright 2016 Your name here, unless otherwise noted.
+# Copyright 2016 Julien Georges
 #
-class shinken {
+class shinken (
+  $daemons_dir = '/etc/shinken/daemons',
+  $modules_dir = '/var/lib/shinken/modules',
+  $workdir     = '/var/run/shinken',
+  $logdir      = '/var/log/shinken',
+) {
 
+  package { 'shinken':
+    ensure => present;
+  }
 
 }
