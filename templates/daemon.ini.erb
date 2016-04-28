@@ -1,0 +1,56 @@
+# File managed by Puppet in module shinken
+[daemon]
+#-- Global Configuration --
+<% if @user.nil? -%>
+#user=shinken         ; if not set then by default it's the current user.
+<% else -%>
+user=<%= @user %>
+<% end -%>
+<% if @group.nil? -%>
+#group=shinken        ; if not set then by default it's the current group.
+<% else -%>
+group=<%= @group %>
+<% end -%>
+# Set to 0 if you want to make this daemon NOT run
+daemon_enabled=<%= @daemon_enabled %>
+
+#-- Path Configuration --
+# The daemon will chdir into the directory workdir when launched
+# paths variables values, if not absolute paths, are relative to workdir.
+workdir=<%= @workdir %>
+logdir=<%= @logdir %>
+pidfile=%(workdir)s/<%= @name %>d.pid
+
+#-- Network configuration --
+<% unless @host.nil? -%>
+host=<%= @host %>
+<% end -%>
+<% unless @port.nil? -%>
+port=<%= @port %>
+<% end -%>
+idontcareaboutsecurity=<%= @idontcareaboutsecurity %>
+
+#-- SSL configuration --
+use_ssl=<%= @use_ssl %>
+# WARNING : Put full paths for certs
+#ca_cert=/etc/shinken/certs/ca.pem
+#server_cert=/etc/shinken/certs/server.cert
+#server_key=/etc/shinken/certs/server.key
+hard_ssl_name_check=<%= @hard_ssl_name_check %>
+http_backend=<%= @http_backend %>
+daemon_thread_pool_size=<%= @daemon_thread_pool_size %>
+
+#-- Local log management --
+# Enabled by default to ease troubleshooting
+use_local_log=<%= @use_local_log %>
+local_log=%(logdir)s/<%= @name %>d.log
+# Accepted log level values: DEBUG,INFO,WARNING,ERROR,CRITICAL
+log_level=<%= @log_level.upcase %>
+
+#-- External modules watchdog --
+# If a module got a brok queue() higher than this value, it will be
+# killed and restart. Put to 0 to disable it
+max_queue_size=<%= @max_queue_size %>
+
+# The path to the modules directory
+modules_dir=<%= @modules_dir %>

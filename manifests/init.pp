@@ -1,36 +1,39 @@
 # Class: shinken
 # ===========================
 #
-# Full description of class shinken here.
+# Install & configure shinken-daemons.
 #
 # Parameters
 # ----------
 #
-# Document parameters here.
+# * `daemons`
+# Hash to specify one or more shinken-daemons.
+# Default: empty
 #
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
-#
-# Variables
-# ----------
-#
-# Here you should define a list of variables that this module would require.
-#
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
+# * `daemons_default`
+# Hash to specify default parameters for shinken-daemons.
+# Default: empty
 #
 # Examples
 # --------
 #
 # @example
-#    class { 'shinken':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#    }
+#class { 'shinken':
+#  daemons         => {
+#    'broker'      => {},
+#    'poller'      => {},
+#    'reactionner' => {},
+#    'receiver'    => {},
+#    'scheduler'   => {
+#      'port'          => '7768',
+#      'use_local_log' => '0',
+#    },
+#  },
+#  daemons_default => {
+#    'user'  => 'shinken',
+#    'group' => 'shinken',
+#  },
+#}
 #
 # Authors
 # -------
@@ -43,14 +46,12 @@
 # Copyright 2016 Julien Georges
 #
 class shinken (
-  $daemons_dir = '/etc/shinken/daemons',
-  $modules_dir = '/var/lib/shinken/modules',
-  $workdir     = '/var/run/shinken',
-  $logdir      = '/var/log/shinken',
-) {
+  $daemons         = {},
+  $daemons_default = {},
+) inherits shinken::params {
 
-  package { 'shinken':
-    ensure => present;
-  }
+  validate_hash($daemons)
+  validate_hash($daemons_default)
+  create_resources(shinken::daemon, $daemons, $daemons_default)
 
 }

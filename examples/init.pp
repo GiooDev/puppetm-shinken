@@ -9,4 +9,19 @@
 # Learn more about module testing here:
 # https://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include ::shinken
+class { 'shinken':
+  daemons         => {
+    'broker'      => {},
+    'poller'      => {},
+    'reactionner' => {},
+    'receiver'    => {},
+    'scheduler'   => {
+      'port'          => '7768',
+      'use_local_log' => '0',
+    },
+  },
+  daemons_default => {
+    'user'  => 'shinken',
+    'group' => 'shinken',
+  },
+}
